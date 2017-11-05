@@ -1,0 +1,1 @@
+{"version":3,"file":"mock-studentresource.js","sourceRoot":"","sources":["mock-studentresource.ts"],"names":[],"mappings":";AAEa,QAAA,eAAe,GAAsB;IACjD;QACE,EAAE,EAAE,CAAC;QACL,KAAK,EAAE,SAAS;QAChB,IAAI,EAAC,sDAAsD;KAC3D;IACD;QACC,EAAE,EAAE,CAAC;QACL,KAAK,EAAE,WAAW;QAClB,IAAI,EAAC,kEAAkE;KACvE;IACD;QACC,EAAE,EAAE,CAAC;QACL,KAAK,EAAE,OAAO;QACd,IAAI,EAAC,yCAAyC;KAC9C;CACF,CAAC"}

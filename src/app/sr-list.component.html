@@ -1,0 +1,16 @@
+<h1>Student Resource</h1>
+<ul >
+	<div class="sr">
+  <li *ngFor="let sr of studentresource" class="card">
+	  <a  [routerLink]="['/srdetail', sr.id]">
+	  	 <h2>{{sr.title}}</h2>
+	   </a>
+	  
+	  	<p>{{sr.body}}</p> 
+	  	 <a  [routerLink]="['/srdetail', sr.id]">
+	  	 <button>start</button>
+	   </a>
+	
+  </li>
+  </div>
+</ul>

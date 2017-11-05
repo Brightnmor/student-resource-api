@@ -1,0 +1,26 @@
+.card{
+	width: 50%;
+	min-height: 250px;
+	background-color: #F48FB1;
+	margin: 5px;
+	padding: 5px;
+}
+.contain{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+}
+p{
+	font-size: 20px;
+}
+h2{
+	color: #000000;
+}
+button{
+	background-color: #00E676;
+	width: 100px;
+	text-transform: uppercase;
+	color: #ffffff;
+	height: 48px;
+}
