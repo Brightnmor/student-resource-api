@@ -8,6 +8,33 @@ import { StudentService } from './student.service';
   	nav{
   	font-size:20px;
   	}
+    .student{
+    display: flex;
+    margin: 10px;
+    width:40%;
+  
+    }
+    .name{
+     background-color: #7986CB;
+    padding: 10px;
+    }
+    .level{
+     background-color: #9FA8DA;
+     padding: 10px;
+    }
+    .dept{
+     background-color: #C5CAE9;
+     padding: 10px;
+    }
+    .delete{
+    background-color: black;
+    color: #ffffff;
+      padding: 5px;
+      cursor: pointer;
+    }
+    a{
+    text-decoration: none;
+    }
   `],
   template:`<h1>admin student</h1>
  
@@ -15,25 +42,23 @@ import { StudentService } from './student.service';
     <input [(ngModel)]="levelValue" placeholder="level">
     <input [(ngModel)]="departmentValue" placeholder="department">
     <button (click)="addStudent()">Add</button>
-  <ul class="sr">
-  <li *ngFor="let s of student">
-	  
-	  	<h3>{{s.name}}</h3>
+  
+	  <div *ngFor="let s of student" class="student">
+    <a *ngIf="s.name" [routerLink]="['/admin/student/edit', s.id]">
+	  	<div class="name">{{s.name}}</div>
      
-	  	<h3>{{s.level}}</h3>
-	  	<h3>{{s.department}}</h3> 
-       <a *ngIf="s.id" [routerLink]="['/admin/student/edit', s.id]">
-       edit </a>
-	  		<button *ngIf="s.id" (click)="delete(s.id)">delete</button>
-	 
-  </li>
-</ul>
+	  	<div class="level">{{s.level}}</div>
+	  	<div class="dept">{{s.department}}</div> 
+    </a>
+	  		<span class="delete" *ngIf="s.name" (click)="delete(s.id)">&times;</span>
+	 </div>
+ 
 `,
 })
 export class AdminStudentComponent implements OnInit{ 
-private nameValue = "";
-private levelValue = "";
-private departmentValue = "";
+ nameValue = "";
+ levelValue = "";
+ departmentValue = "";
 
 student: Student[];
 

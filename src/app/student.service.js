@@ -78,7 +78,8 @@ var StudentService = (function () {
 }());
 StudentService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [http_1.Http])
+    __metadata("design:paramtypes", [typeof (_a = typeof http_1.Http !== "undefined" && http_1.Http) === "function" && _a || Object])
 ], StudentService);
 exports.StudentService = StudentService;
+var _a;
 //# sourceMappingURL=student.service.js.map

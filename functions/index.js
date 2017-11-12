@@ -11,170 +11,323 @@ admin.initializeApp({
   databaseURL: "https://student-resource-api.firebaseio.com"
 });
 const express = require('express');
+var cors = require('cors');
 const app = express();
+var studentresource = [];
+var student = [];
+
+  var db = admin.database();
+  
+app.use(cors());
+
+function getData(req, res){
+  studentresource = [];
+   var ref = db.ref("studentresource");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   studentresource.push({ 
+        id: count,
+        title: data.title, 
+        body: data.body,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+     res.json(studentresource);
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+}
+
+function getStudentData(req, res){
+  student = [];
+   var ref = db.ref("student");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   student.push({ 
+        id: count,
+        name: data.name, 
+        level: data.level,
+        department: data.department,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+     res.json(student);
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+}
+
 
 var bodyParser = require('body-parser');
 var parseUrlencoded = bodyParser.urlencoded({ extended: false });
 
-var student = [ {
-   "id": 1, 
-   "name": "Mr. Bright",
-   "level":"HND 2",
-   "department": "Computer Science"
-  },
-  {
-   "id": 2, 
-   "name": "John",
-   "level":"ND 1",
-   "department": "Agric Tech" 
-  },
-  {
-   "id": 3, 
-   "name": "Mr. Nelson",
-   "level":"HND 1",
-   "department": "BAM" 
-  },
-  {
-   "id": 4, 
-   "name": "Sandra",
-   "level":"ND 2",
-   "department": "Accounting" 
-  }];
 
-  var studentresource = [
-    {
-  "id":"1",
-  "title":"Todoist",
-  "body":"A beautifully simple task-tracking app. It’s free (with premium features for less than $2.50/month), syncs across all platforms and devices (and the web), has recurring tasks, multiple lists, and is pretty to boot."
-  },
-  {
-  "id":"2",
-  "title":"The Ultimate Study Music Playlist",
-  "body":"I study far, far more effectively when I'm listening to music - as long as it's the right kind of music. This is a playlist of 160-odd songs I've been building; it's got a ton of variety, and features music from video game soundtracks, movie/anime scores, and artists from many genres." 
-  },
-  {
-  "id":"3",
-  "title":"Habitica - Habit Tracker",
-  "body":"A habit tracking app that I use every single day. I use it for smaller habits – remembering to floss, doing pull-ups, juicing, reading 30 minutes a day, taking vitamins, etc. Without it, I’m prone to letting work take over my life and forgetting to do these things. With it, I’m a small-habit superhero."
-  },
-  {
-  "id":"4",
-  "title":"Tomighty - Pomodoro Timer",
-  "body":"One of the most effective ways to immediately stop procrastinating is to use the Pomodoro Technique: set a timer for 25 minutes, commit to one task, and do nothing but that task until the timer dings. I do this almost every day, and I use Tomighty - a free app for Mac and PC - as my timer." 
-  },
-  {
-  "id":"5",
-  "title":"Google Drive - File Syncing and Backup",
-  "body":"The most essential app ever for anyone who uses a computer. Keeps your files backed up and synced across all your computers and devices, as well as on the web. Forget your paper on your home computer? No worries, it's in Drive."
-  }
-  ];
+
+  
 
 
 // get student resource
 app.get('/studentresource.json', (request, response) =>{
-response.json(studentresource);
+
+ getData(request, response);
+
 });
 
-app.get('/studentresource/:id.json',function(request, response){
-	var detail = studentresource[request.params.id - 1];
-	if(!detail){
-		response.status(404).json('no detail for '+request.params.id);
-	}else{
-		response.json(detail);
-	}	
+app.get('/studentresource/:id',function(request, response){
+    studentresource = [];
+   var ref = db.ref("studentresource");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   studentresource.push({ 
+        id: count,
+        title: data.title, 
+        body: data.body,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+      var detail = studentresource[request.params.id ];
+  if(!detail){
+    response.status(404).json('no detail for '+request.params.id);
+  }else{
+    response.json(detail);
+  } ;
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
 });
 
 
 
 app.get('/admin/student.json', (request, response) =>{
- 
-response.json(student);
+ getStudentData(request, response);
+
 });
 
 app.get('/admin/student/:id',function(request, response){
-
-	var detail = student[request.params.id - 1];
-	if(!detail){
-		response.status(404).json('no detail for '+request.params.id);
-	}else{
-		response.json(detail);
-	}	
+    student = [];
+   var ref = db.ref("student");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   student.push({ 
+      id: count,
+        name: data.name, 
+        level: data.level,
+        department: data.department,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+      var detail = student[request.params.id ];
+  if(!detail){
+    response.status(404).json('no detail for '+request.params.id);
+  }else{
+    response.json(detail);
+  } ;
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
 });
 
 
 
 // post request
 app.post('/admin/studentresource.json',parseUrlencoded, function(request, response){ 
-    //Check if all fields are provided and are valid: 
+   //Check if all fields are provided and are valid: 
    
-    var newId = studentresource[studentresource.length-1].id+1; 
-    studentresource.push({ 
-        id: newId, 
+  //var newId = student[student.length-1].id+1; 
+    var db = admin.database();
+  var ref = db.ref("studentresource");
+
+  // push data to firebase
+    
+     ref.push({
         title: request.body.title, 
-        body: request.body.body 
-    }); 
-    response.json({message: "New student resource created.", location: "/admin/studentresource" + newId}); 
-     
+        body: request.body.body  
+     });
+     getData(request, response);
+ // response.json({message: "New student created.", location: "/admin/student" + "newId"}); 
 }); 
 
 
 // post request
-app.post('/admin/student.json',parseUrlencoded, function(req, res){ 
+app.post('/admin/student.json',parseUrlencoded, function(request, response){ 
     //Check if all fields are provided and are valid: 
    
-  var newId = student[student.length-1].id+1; 
-  student.push({ 
-      id: newId, 
-      name: req.body.name, 
-      level: req.body.level,
-      department:req.body.department
-  }); 
-  res.json({message: "New student created.", location: "/admin/student" + newId}); 
+   var db = admin.database();
+  var ref = db.ref("student");
+
+  // push data to firebase
+    
+     ref.push({
+         name: request.body.name, 
+        level: request.body.level,
+        department: request.body.department,
+     });
+  response.json({message: "New student created.", location: "/admin/student" + "newId"}); 
      
 }); 
+
+
 // update student resoure
 app.put('/admin/studentresource/edit/:id', function(req, res){
-	   var newId = req.params.id - 1; 
-        studentresource[newId]={ 
-            id: newId, 
-            title: req.body.title, 
-            body: req.body.body 
-        }; 
-        res.json({message: "New student resource created.", location: "/admin/studentresource/edit" + newId}); 
-     
+
+  var db = admin.database();
+   var ref = db.ref("studentresource");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   studentresource.push({ 
+        id: count,
+        title: data.title, 
+        body: data.body,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+      var detail = studentresource[req.params.id ];
+  if(!detail){
+    res.status(404).json('no detail for '+req.params.id);
+  }else{
+    var editRef = admin.database().ref('studentresource/'+detail.key);
+    editRef.update({
+      title: req.body.title,
+      body: req.body.body
+    });
+       res.json({message: "New student resource created.", location: "/admin/studentresource/edit" + newId}); 
+  }
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+  });
 });
 
 // update student resoure
 app.put('/admin/student/edit/:id', function(req, res){
-	   var newId = req.params.id - 1; 
-        student[newId]={ 
-           id: newId, 
-            name: req.body.name, 
-            level: req.body.level,
-            department:req.body.department
-        }; 
-        res.json({message: "New student created.", location: "/admin/student/edit" + newId}); 
-     
+	  var db = admin.database();
+   var ref = db.ref("student");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
+   
+  var data = childSnapshot.val();
+   student.push({ 
+       id: count,
+        name: data.name, 
+        level: data.level,
+        department: data.department,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+      var detail = student[req.params.id ];
+  if(!detail){
+    res.status(404).json('no detail for '+req.params.id);
+  }else{
+    var editRef = admin.database().ref('student/'+detail.key);
+    editRef.update({
+      name: req.body.name, 
+        level: req.body.level,
+        department: req.body.department,
+    });
+       res.json({message: "New student created.", location: "/admin/student/edit" + newId}); 
+  }
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+  });
 });
 
 // delete student resource
 app.delete('/admin/studentresource/delete/:id', function(req, res){ 
     //Check if all fields are provided and are valid: 
+       var db = admin.database();
+      var ref = db.ref("studentresource");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
    
-        var newId = req.params.id - 1; 
-        studentresource.splice(newId, 1); 
-        res.json({message: "New student resource created.", location: "/admin/studentresource/delete/" + newId}); 
-     
+  var data = childSnapshot.val();
+   studentresource.push({ 
+        id: count,
+        title: data.title, 
+        body: data.body,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+
+      var detail = studentresource[req.params.id ];
+  if(!detail){
+    res.status(404).json('no detail for '+req.params.id);
+  }else{
+    var deleteRef = admin.database().ref('studentresource/'+detail.key);
+    deleteRef.set({
+      title: "",
+      body: ""
+    });
+  } ;
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+  });
 });
 
 // delete student 
 app.delete('/admin/student/delete/:id', function(req, res){ 
     //Check if all fields are provided and are valid: 
+       var db = admin.database();
+      var ref = db.ref("student");
+  ref.on("value", function(snapshot) {
+     var count = 0;
+   snapshot.forEach(childSnapshot => {
    
-        var newId = req.params.id - 1; 
-        student.splice(newId, 1); 
-        res.json({message: "New student created.", location: "/admin/student/delete/" + newId}); 
-     
+  var data = childSnapshot.val();
+   student.push({ 
+        id: count,
+        name: data.name, 
+        level: data.level,
+        department: data.department,
+        key: childSnapshot.key
+    }); 
+   count++;
+ });
+
+      var detail = student[req.params.id ];
+  if(!detail){
+    res.status(404).json('no detail for '+req.params.id);
+  }else{
+    var deleteRef = admin.database().ref('student/'+detail.key);
+    deleteRef.set({
+        name: "", 
+        level: "",
+        department: ""
+    });
+  } ;
+   
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+  });
 });
 
 

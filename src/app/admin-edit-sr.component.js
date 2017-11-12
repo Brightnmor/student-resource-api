@@ -41,9 +41,8 @@ AdminEditSrComponent = __decorate([
         styles: ["\t\n  \tnav{\n  \tfont-size:20px;\n  \t}\n  "],
         template: "<h2>edit sr</h2>\n  <input value=\"sr.title\" placeholder=\"title\">\n    <input value=\"sr.body\" placeholder=\"body\">\n  <button (click)=\"edit()\">Save</button>\n  ",
     }),
-    __metadata("design:paramtypes", [student_resource_service_1.StudentResourceService,
-        router_1.ActivatedRoute,
-        common_1.Location])
+    __metadata("design:paramtypes", [student_resource_service_1.StudentResourceService, typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof common_1.Location !== "undefined" && common_1.Location) === "function" && _b || Object])
 ], AdminEditSrComponent);
 exports.AdminEditSrComponent = AdminEditSrComponent;
+var _a, _b;
 //# sourceMappingURL=admin-edit-sr.component.js.map

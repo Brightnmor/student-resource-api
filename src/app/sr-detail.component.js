@@ -40,9 +40,8 @@ SrDetailComponent = __decorate([
         styleUrls: ['./sr-detail.component.css'],
         templateUrl: './sr-detail.component.html'
     }),
-    __metadata("design:paramtypes", [student_resource_service_1.StudentResourceService,
-        router_1.ActivatedRoute,
-        common_1.Location])
+    __metadata("design:paramtypes", [student_resource_service_1.StudentResourceService, typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof common_1.Location !== "undefined" && common_1.Location) === "function" && _b || Object])
 ], SrDetailComponent);
 exports.SrDetailComponent = SrDetailComponent;
+var _a, _b;
 //# sourceMappingURL=sr-detail.component.js.map

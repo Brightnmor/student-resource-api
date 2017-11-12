@@ -1,16 +1,18 @@
 <h1>Student Resource</h1>
-<ul >
-	<div class="sr">
-  <li *ngFor="let sr of studentresource" class="card">
-	  <a  [routerLink]="['/srdetail', sr.id]">
-	  	 <h2>{{sr.title}}</h2>
-	   </a>
-	  
-	  	<p>{{sr.body}}</p> 
-	  	 <a  [routerLink]="['/srdetail', sr.id]">
-	  	 <button>start</button>
-	   </a>
-	
-  </li>
-  </div>
-</ul>
+
+ <div *ngFor="let sr of studentresource" class="contain">
+     
+      	<div *ngIf="sr.body" class="card">
+    	 <a  [routerLink]="['/srdetail', sr.id]">
+          <h3 class="circle">{{sr.title}}</h3>
+         </a>
+        <p>{{sr.body}}Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+        <a *ngIf="sr.body" [routerLink]="['/srdetail', sr.id]">
+          <button>get start</button>
+        </a>
+     
+        </div>
+ </div>
+

@@ -14,14 +14,16 @@ import { StudentResource } from './studentresource';
 })
 
 export class SrDetailComponent implements OnInit {
-sr: {} = StudentResource;
+sr:StudentResource;
 
 constructor(
 private studentResourceService: StudentResourceService,
 private route: ActivatedRoute,
-private location: Location) {}
+private location: Location) {
+}
 
 ngOnInit(): void {
+
   this.route.paramMap
     .switchMap((params: ParamMap) => 
     this.studentResourceService.getSr(+params.get('id')))

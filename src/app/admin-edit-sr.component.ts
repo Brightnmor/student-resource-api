@@ -14,13 +14,16 @@ import { StudentResourceService } from './student-resource.service';
   	}
   `],
   template:`<h2>edit sr</h2>
-  <input value="sr.title" placeholder="title">
-    <input value="sr.body" placeholder="body">
+  <input [ngModel]="sr?.title" (ngModelChange)="sr.title = $event" />
+  <input [ngModel]="sr?.body" (ngModelChange)="sr.body = $event" />
+  
   <button (click)="edit()">Save</button>
+  <div>{{sr?.key}}</div>
   `,
 })
 export class AdminEditSrComponent implements OnInit{ 
 
+ @Input() sr: StudentResource;
 
  
 constructor(
@@ -28,7 +31,6 @@ private studentResourceService: StudentResourceService,
 private route: ActivatedRoute,
 private location: Location) {}
 
-sr : StudentResource;
 errorMessage: string;
 
 

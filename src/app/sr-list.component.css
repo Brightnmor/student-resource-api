@@ -1,9 +1,22 @@
-.card{
-	width: 25%;
-	min-height: 150px;
-	background-color: #F48FB1;
-	margin: 5px;
-	padding: 5px;
+
+.circle {
+display: inline-block;
+width: 64px;
+height: 64px;
+text-align: center;
+color: #555;
+border-radius: 50%;
+background: #ddd;
+font-size: 30px;
+line-height: 64px;
+}
+
+.contain{
+	margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
 }
 a{
 	text-decoration: none;
@@ -18,10 +31,10 @@ p{
 h2{
 	color: #ffffff;
 }
-button{
+/*button{
 	background-color: #00E676;
 	width: 100px;
 	text-transform: uppercase;
 	color: #ffffff;
 	height: 48px;
-}
+}*/

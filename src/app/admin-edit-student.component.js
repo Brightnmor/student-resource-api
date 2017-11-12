@@ -41,9 +41,8 @@ AdminEditStudentComponent = __decorate([
         styles: ["\t\n  \tnav{\n  \tfont-size:20px;\n  \t}\n  "],
         template: "<h2>edit student</h2>\n  <input [(ngModel)]=\"s.name\" placeholder=\"name\">\n  <input [(ngModel)]=\"s.level\" placeholder=\"level\">\n     <input [(ngModel)]=\"s.department\" placeholder=\"department\">\n  <button (click)=\"edit()\">Save</button>\n  ",
     }),
-    __metadata("design:paramtypes", [student_service_1.StudentService,
-        router_1.ActivatedRoute,
-        common_1.Location])
+    __metadata("design:paramtypes", [student_service_1.StudentService, typeof (_a = typeof router_1.ActivatedRoute !== "undefined" && router_1.ActivatedRoute) === "function" && _a || Object, typeof (_b = typeof common_1.Location !== "undefined" && common_1.Location) === "function" && _b || Object])
 ], AdminEditStudentComponent);
 exports.AdminEditStudentComponent = AdminEditStudentComponent;
+var _a, _b;
 //# sourceMappingURL=admin-edit-student.component.js.map

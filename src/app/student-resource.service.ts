@@ -37,10 +37,10 @@ options: RequestOptions;
 
 }
 
-
+ 
 /* get student resource by id */
 getSr(id: number){
-	return this.http.get('https://student-resource-api.firebaseapp.com/studentresource/'+id+'.json')
+	return this.http.get('https://student-resource-api.firebaseapp.com/studentresource/'+id)
 			.map(response => <StudentResource>response.json());
 }
 
@@ -54,7 +54,7 @@ addStudentResource(newSr: StudentResource){
 	    }), {headers: this.headers})
 	      .subscribe(
 	        res => {
-	          console.log(res);
+	         console.log(res);
 	        },
 	        err => {
 	          console.log("Error occured");

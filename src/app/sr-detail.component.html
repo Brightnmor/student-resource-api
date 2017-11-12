@@ -1,8 +1,15 @@
+
+
 <div class="contain">
+
 	<div class="card">
-	 <h1>Detail</h1>
-	<h2>{{sr.title}}</h2>
-	<p>{{sr.body}}</p>
-	<button (click)="goBack()">Back</button>
+		 <h1>Detail</h1>
+		<div class="intro">
+			<h3>{{sr?.title}}</h3>
+			
+		</div>
+		<p>{{sr?.body}}</p>
+		<button (click)="goBack()">Back</button>
 	</div>
+	
 </div>
