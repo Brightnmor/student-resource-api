@@ -18,7 +18,7 @@ import { StudentResourceService } from './student-resource.service';
   <input [ngModel]="sr?.body" (ngModelChange)="sr.body = $event" />
   
   <button (click)="edit()">Save</button>
-  <div>{{sr?.key}}</div>
+  
   `,
 })
 export class AdminEditSrComponent implements OnInit{ 
